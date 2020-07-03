@@ -39,3 +39,7 @@ $ ./setup
 I made No Troublian to help me setup a system automatically and keep track of all the things that I want to have from the beginning. This may only help setup a Debian10 system but you can take advantage of this to make a script which works with your package manager and system.
 
 Bash is powerful on its own and because I wanted to learn a language that would help me better communicate with my system.
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
