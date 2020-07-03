@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# source code pro font from adobe
+git clone https://github.com/adobe-fonts/source-code-pro.git $home/Downloads/.tmp
+cd $home/Downloads/.tmp/TTF
+mkdir /usr/share/fonts/truetype/source-code-pro
+mv *.ttf /usr/share/fonts/truetype/source-code-pro
+rm -rf $home/Downloads/.tmp

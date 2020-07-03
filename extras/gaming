@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# add multiarch
+dpkg --add-architecture i386
+apt update
+
+# install nvidia drivers
+apt -y install linux-headers-amd64
+apt-get -ty buster-backports install nvidia-driver
+apt -y install nvidia-driver-libs-i386
+
+# install steam
+apt -y install steam
+
+# install wine
+apt -y install wine wine32 wine64 libwine libwine:i386 fonts-wine
+
+# install lutris
+echo 'deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ /' | tee /etc/apt/sources.list.d/home:strycore.list
+wget -nv https://download.opensuse.org/repositories/home:strycore/Debian_10/Release.key -O "/etc/apt/trusted.gpg.d/home:strycore.asc"
+apt update
+apt -y install lutris

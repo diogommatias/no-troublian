@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Home's path
+# usage: /home/username
+declare home="/home/diogo"
+
+# update and upgrade system
+apt update && apt -y upgrade
+
+# add backports
+if [ -f "extras/backports" ]; then
+    . extras/backports
+fi
+
+# add user to sudo group
+gpasswd -a $USER sudo
+
+# git is a requirement
+apt -y install git
+
+# install fonts
+declare fonts=(firacode ibm-plex roboto-unhinted)
+for f in ${fonts[@]}; do
+    apt -y install "fonts-$f"
+done
+if [ -f "extras/fonts-extras" ]; then
+    . extras/fonts-extras
+fi
+fc-cache
+
+# install icons
+declare icons=(moka obsidian papirus)
+for i in ${icons[@]}; do
+    apt -y install "$i-icon-theme"
+done
+
+# install themes
+declare themes=(adapta-gtk arc)
+for t in ${themes[@]}; do
+    apt -y install "$t-theme"
+done
+
+# install elementaryOS's wallpapers
+git clone https://github.com/elementary/wallpapers.git $home/Downloads/.tmp
+cd $home/Downloads/.tmp/backgrounds
+mv *.jpg $home/Pictures
+rm -rf $home/Downloads/.tmp
+
+# install flatpak
+apt -y install flatpak gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# install all things for gaming
+if [ -f "extras/gaming" ]; then
+    . extras/gaming
+fi
+
+# restore permissions on files
+chown -R $USER: $HOME
+
+echo "All done! Restart and enjoy!"

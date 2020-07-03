@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# add buster-backports
+echo -e "\n\n# Buster-backports\ndeb http://deb.debian.org/debian buster-backports main contrib non-free" >> /etc/apt/sources.list
+apt update
+
+# add alias to buster-backports
+echo "alias backports='sudo apt-get -t buster-backports'" >> $home/.bash_aliases
